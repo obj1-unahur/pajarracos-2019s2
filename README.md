@@ -1,18 +1,17 @@
-# Pajarracos
+# Parcial -2023 - T.Noche.
 
-Se nos pide desarrollar parte del modelo de un juego inspirado en el viejo Angry Birds. Las definiciones incluyen varias etapas en el desarrollo.
+La ornitología es una rama de la zoología que se encarga del estudio de las aves en sus diferntes lineas de invetigación. Relacionado a este tema, la universidad nos solicita armar un sistema que permita estudiar el comportamiento de algunas aves que viven en unas islas muy particulares. Las definiciones incluyen varias etapas en el desarrollo.
 
 ## Algunas aves
 
-En esta etapa tenemos que modelar algunas de las aves que pueden aparecer en el juego. De cada ave nos interesa saber su **fuerza** (que es un número). Por otra parte, la dinámica del juego incluye circunstancias en las que un ave **recibe un disgusto**; para cada ave se define qué debe hacer en tal caso.
+En esta etapa tenemos que modelar algunas de las aves. De cada ave nos interesa saber su **fuerza** (que es un número). Por otra parte, la dinámica del vivir en las islas incluye circunstancias en las que un ave **recibe un disgusto**; para cada ave se define qué debe hacer en tal caso.
 
-Se definen tres especies de aves: aguiluchos, albatros y palomas.
+Inicialmente se definen tres especies de aves: aguiluchos, albatros y palomas.
 
 #### Aguiluchos
-De cada aguilucho se conoce su velocidad, que inicialmente es de 20 km/h pero puede variar en cualquier momento.  
+De cada aguilucho se conoce su velocidad, que inicialmente es de 20 km/h pero puede variar de acuedo a determiandos eventos.  
 La **fuerza** se calcula en base a su velocidad: si es de 60 km/h o menos entonces es 180; en caso contrario, es el triple de la velocidad.
-Al **recibir un disgusto**, duplica su velocidad.    
-O sea, un aguilucho cuya velocidad es 40 km/h tiene 180 de fuerza. Si recibe un disgusto, su velocidad pasa a 80 km/h, y por lo tanto, su fuerza se calcula como 240.
+Al **recibir un disgusto**, duplica su velocidad. O sea, un aguilucho cuya velocidad es 40 km/h tiene 180 de fuerza. Si recibe un disgusto, su velocidad pasa a 80 km/h, y por lo tanto, su fuerza se calcula como 240.
 
 #### Albatros
 Para los albatros, la fuerza se define en base al peso y la masa muscular. Cuando se crea, un albatros pesa 4000 gramos, y tiene 600 de masa muscular.  
@@ -34,9 +33,9 @@ La fuerza de un **aguilucho colorado** es de 400 unidades más de lo que corresp
 Para una **paloma torcaza**, la fuerza aumenta en 100 unidades por cada uno de sus huevos. Una paloma torcaza nace con 3 huevos. Cuando recibe un disgusto, además de la acción común a todas las palomas, pone un huevo.
 
 
-## Islas
+## Islas Especiales
 
-El mapa del juego incluye muchas **islas**. En cada isla hay aves.
+En nuestro estudio se incluye muchas **islas**. En cada isla hay aves.
 
 Se pide modelar las islas, de forma de poder realizar lo que sigue:
 
@@ -49,17 +48,32 @@ Se pide modelar las islas, de forma de poder realizar lo que sigue:
 
 ## Test de isla y aves
 
-Armar un test con el siguiente escenario inicial
-- crear un aguilucho colorado, un albatros y una paloma torcaza. Después, hacer que el albatros vaya al gimnasio.
-- crear una isla, y agregar a las tres aves.
+Armar los test solicitados con el siguiente escenario.
+- crear un aguilucho colorado, un albatros y una paloma torcaza y crear una isla.
+- La incializacion del escenario debe hacer lo siguiente:
+Agregar a las tres aves y Después, hacer que el albatros vaya al gimnasio.
+```
+describe "Test de islas y aves" {
+	const agc = new AguiluchoColorado()
+	const alb = new Albatro()
+	const pat = new PalomaTorcaza()
+	const i1 = new Isla()
+	method initialize() {
+		i1.agregarAve(agc)
+		i1.agregarAve(alb)
+		i1.agregarAve(pat)
+		alb.irAlGimnasio()
+	}	
+}
+```
 
-Verificar que
+Verificar con test indivuales
 - la fuerza del aguilucho debe ser 580, la del albatros 1100, y la de la paloma 700 respectivamente.
 - el peso del albatros debe ser 4500.
 - la fuerza total de la isla es 2380.
 - las aves débiles de la isla son el aguilucho y la paloma.
 
-A partir de la situación inicial, indicar que en la isla hubo un terremoto. Después de esto:
+A partir de la situación inicial, indicar que en la isla hubo un terremoto. Después de esto validar en un solo test:
 * la velocidad del aguilucho debe aumentar a 40,
 * el peso del albatros a 5300,
 * y la ira de la paloma a 500.
