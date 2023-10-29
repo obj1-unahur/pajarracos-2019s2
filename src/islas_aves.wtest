@@ -1,0 +1,79 @@
+import aves.*
+import islas.*
+
+describe "Test de islas y aves" {
+	const ac = new AguiluchoColorado()
+	const ab = new Albatro()
+	const pt = new PalomaTorcaza()
+	const i1 = new Isla()
+	method initialize() {
+		i1.agregarAve(ac)
+		i1.agregarAve(ab)
+		i1.agregarAve(pt)
+		ab.irAlGimnasio()
+	}	
+	
+	test "fueza del aguilucho colorado" {
+		assert.equals(580, ac.fuerza())
+	}
+	test "fuerza del albatro" {
+		assert.equals(1100, ab.fuerza())
+	}
+	test "fueza de la paloma torcaza" {
+		assert.equals(700, pt.fuerza())
+	}
+	test "peso del albatro" {
+		assert.equals(4500, ab.peso())
+	}
+	test "fuerza total de la isla" {
+		assert.equals(2380, i1.fuerzaTotal())
+	}
+	test "aves Debiles" {
+		assert.equals( [ac, pt], i1.avesDebiles())
+	}
+	
+	test "terremoto" {
+		i1.terremoto()
+		assert.equals(40, ac.velocidad())
+		assert.equals(5300, ab.peso())
+		assert.equals(500, pt.ira())
+	}
+
+	test "tormeta despues del terremoto" {
+		i1.terremoto()
+		i1.tormenta()
+		assert.equals(80, ac.velocidad())
+		assert.equals(640, ac.fuerza())
+		assert.equals(5300, ab.peso())
+		assert.equals(500, pt.ira())
+	} 	 
+	
+	test "capitana" {
+		assert.equals(ab, i1.capitana())
+	}	
+
+	test "no hay capitana" {
+		i1.quitarAve(ab)
+		assert.throwsExceptionWithMessage("No hay candidatas para ser capitanas", {
+			i1.capitana()
+		})
+	}	
+	
+	test "abatro esta conforme con la isla " {
+		assert.notThat(ab.estaConformeCon(i1))
+	}
+	
+	test "palomar torcaza es conforme con la isla" {
+		assert.that(pt.estaConformeCon(i1))
+	}
+	
+	test "aguilucho colorado esta conforme con la isla " {
+		assert.that(ac.estaConformeCon(i1))
+	}
+	
+	test "la isla esta en paz" {
+		assert.notThat(i1.estaEnPaz())
+	}
+}
+
+

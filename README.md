@@ -76,17 +76,26 @@ Agregar a cada isla una cantidad de alpiste y una de maíz, las dos nacen en 10.
 
 Agregar dos nuevas consultas sobre la isla, su _ave capitana_ y si _está en paz_ o no; y dos nuevas acciones, la _sesión de relax_ y la _alimentación_.
 
-- El _ave capitana_ de una isla es la que tiene más fuerza, considerando solamente aquellas cuya fuerza esté entre 1000 y 3000. **Ojo:** un ave de 4000 nunca va a ser capitana, porque se excede de los 3000, tampoco una de 800 (ni aunque sean las más fuertes).
+- El _ave capitana_ de una isla es la que tiene más fuerza, considerando solamente aquellas **_aves candidatas_** cuya fuerza esté entre 1000 y 3000. En el caso de no haya capitana enviar un mensaje de error del estilo "No hay candidatas para ser capitanas". **Ojo:** un ave de 4000 nunca va a ser capitana, porque se excede de los 3000, tampoco una de 800 ni aunque sean las más fuertes. Armar el test correspondiente para validar que el albatro sea el ave candidata en el escenario de las tres aves de la etapa 1. Armar un segundo escenario que saque al albatro de la isla y validar que no haya aves candidatas.  
 
-- El efecto de una _sesión de relax_ es indicarle a cada ave que _se relaje_. Qué pasa con cada ave cuando se relaja:
-	- un aguilucho disminuye su velocidad en 10 km/h.
-	- un albatros pierde 300 gramos de peso.
-	- una paloma disminuye su ira en 50 unidades.
 
-- La condición para que una isla _esté en paz_ es que todas las aves estén conformes con la isla, de acuerdo a esta definición
+
+- El efecto de una _sesión de relax_ es indicarle a cada ave que _se relaje_. Qué pasa con cada ave cuando se relaja 
+	- un aguilucho aumenta su velocidad en 10 km/h. Considerar que la velocidad nunca puede super los 150 kms/h
+	- un albatros pierde 300 gramos de peso. Considerar que la unidad de gramos nunca puede ser negativa.
+	- dependiendo de que tan buena sea la session de relax una paloma torcaza disminuye su ira en un número aleatorio entre 25 y 50. Mientras que a una paloma comun la sesión de relax no le produce ningún efecto. Considerar que la unidad de ira nunca puede ser un numero negativo. 
+
+
+- La condición para que una isla _esté en paz_ es que todas las aves estén conformes con la isla, de acuerdo a esta definición. (**Ayuda**, el ave debe tener la responsabilidad de saber si esta conforme o no con la isla en la que habita.)
 	- un aguilucho está conforme con una isla, si en la isla hay al menos 8 unidades de alpiste.
 	- un albatros está conforme con una isla, si en la isla hay a lo sumo 2 aves que tengan más fuerza que él.
-	- una paloma está conforme con una isla, si en la isla hay a lo sumo 1 ave débil.
+	- una paloma está conforme con una isla, si en la isla hay a lo sumo 1 ave débil que no sea ella misma.
+
+- Armar el test que valida que cada ave este conforme o no lo la isla y luego el test para determinar si la isla esta en paz o no.
+	- La paloma torcaza está conforme con la isla.(en la isla hay otra ave que es débil)
+	- El aguiluco colorado está conforme con la isla (en la isla hay apliste suficiente)
+	- El albatro No esta conforme con la isla.
+	- La isla no esta en paz.
 
 - El efecto de la _alimentación_ es indicarle a cada ave que _tome alimento **de la isla**_. Qué pasa con cada ave cuando se le indica que tome alimento de una isla:
 	- un aguilucho saca 3 unidades de alpiste, que se restan de la cantidad que tiene la isla, y aumenta su velocidad en 15 km/h.
@@ -103,7 +112,7 @@ Agregar una nueva acción sobre las palomas, _equilibrarse_, que hace lo siguien
 
 Además, agregar las siguientes variantes de paloma: la paloma montera y la paloma manchada.
 
-Para cada **paloma montera** se define un _tope de fuerza_, que nace en 2000, pero puede variarse libremente. La fuerza de una paloma montera no puede superar el tope indicado.
+Para cada **paloma montera** se define un _tope de fuerza_ que es comun a todas las palomas monteras cuyo valor inicial es de 2000, pero puede variarse libremente. La fuerza de una paloma montera no puede superar el tope indicado.
 
 De cada **paloma manchada** se conoce el conjunto de sus nidos, puede tener más de uno. A su vez, de cada nido se conoce el grosor y la resistencia del material; los valores iniciales son 5 y 3 respectivamente. Una paloma manchada nace sin ningún nido.  
 Cuando _recibe un disgusto_, además de lo que hacen todas las palomas, una paloma manchada construye un nuevo nido.  
